@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Banner from '../Banner/Banner';
 
 const Home = props => {
     return (
         <div>
-            <h2>Home</h2>
+            <Banner></Banner>
         </div>
     );
 };
