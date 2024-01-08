@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet-async';
+import Cover from '../../Shared/Cover/Cover';
+import menuImg from '../../../assets/menu/banner3.jpg'
+import PopularMenu from '../../Home/PopularMenu/PopularMenu';
 
 const Menu = props => {
     return (
@@ -8,7 +11,13 @@ const Menu = props => {
             <Helmet>
                 <title>Bistro Boss | Menu</title>
             </Helmet>
-            <h2>Menu</h2>
+            <Cover img={menuImg} title="Our Menu"></Cover>
+            <PopularMenu></PopularMenu>
+            <Cover img={menuImg} title="Our Menu"></Cover>
+            <PopularMenu></PopularMenu>
+            <Cover img={menuImg} title="Our Menu"></Cover>
+            <PopularMenu></PopularMenu>
+
         </div>
     );
 };
