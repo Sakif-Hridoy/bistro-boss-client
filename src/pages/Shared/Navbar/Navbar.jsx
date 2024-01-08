@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = props => {
 
     const navOptions = <>
+    <li><NavLink to="/">Home</NavLink></li>
+    <li><NavLink to="/menu">Our Menu</NavLink></li>
     
-    <li><a>Item 1</a></li>
-        <li>
-          <a>Parent</a>
-        </li>
-        <li><a>Item 3</a></li>
     
     </>
 
