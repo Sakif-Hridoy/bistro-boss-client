@@ -27,8 +27,8 @@ const Menu = props => {
             </Helmet>
             <Cover img={menuImg} title="Our Menu"></Cover>
             <SectionTitle subHeading="Dont Miss" heading="Todays Offer"></SectionTitle>
-            <MenuCategory items={offered} title="Offered Items"></MenuCategory>
-            <MenuCategory items={dessert} title="desserts" img={dessertImg}></MenuCategory>
+            <MenuCategory items={offered} title="offered"></MenuCategory>
+            <MenuCategory items={dessert} title="dessert" img={dessertImg}></MenuCategory>
             <MenuCategory items={salad} title="salad" img={saladImg}></MenuCategory>
             <MenuCategory items={soup} title="soup" img={soupImg}></MenuCategory>
             <MenuCategory items={pizza} title="pizza" img={pizzaImg}></MenuCategory>

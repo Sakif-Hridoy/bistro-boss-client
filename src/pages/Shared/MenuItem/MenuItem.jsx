@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const MenuItem = ({item}) => {
     const {name,image,price,recipe} = item;
@@ -10,8 +11,6 @@ const MenuItem = ({item}) => {
                 <h3 className='uppercae'></h3>
                 <p>{recipe}</p>
             </div>
-            <button className='btn btn-outline'>Order Now</button>
-
         </div>
     );
 };

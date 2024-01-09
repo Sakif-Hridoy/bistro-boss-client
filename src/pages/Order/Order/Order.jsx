@@ -6,16 +6,24 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import useMenu from "../../../hooks/useMenu";
 import FoodCard from "../../../components/FoodCard/FoodCard";
+import OrderTab from "../OrderTab/OrderTab";
+import { useParams } from "react-router-dom";
 
-const Order = (props) => {
-    const [tabIndex,setTabIndex] = useState(0);
-    const [menu] = useMenu()
-    const dessert = menu.filter(item=>item.category === 'dessert')
+const Order = () => {
+  const categories = ['salad','pizza','soup','dessert','drinks'];
+  const { category } = useParams();
+  const initialIndex = categories.indexOf(category)
+  const [tabIndex,setTabIndex] = useState(initialIndex);
+  const [menu] = useMenu();
+    // console.log(category)
+    
     const salad = menu.filter(item=>item.category === 'salad')
-    const soup = menu.filter(item=>item.category === 'soup')
     const pizza = menu.filter(item=>item.category === 'pizza')
-    const offered = menu.filter(item=>item.category === 'offered')
+    const soup = menu.filter(item=>item.category === 'soup')
+    const dessert = menu.filter(item=>item.category === 'dessert')
     const drinks = menu.filter(item=>item.category === 'drinks')
+    const offered = menu.filter(item=>item.category === 'offered')
+    
   return (
     <div>
       <Cover img={orderCover} title="Order Food"></Cover>
@@ -28,10 +36,11 @@ const Order = (props) => {
     <Tab>Drinks</Tab>
   </TabList>
   <TabPanel>
-    <div className="grid md:grid-cols-3 gap-10">
-    {
+    <div>
+      <OrderTab items={salad}></OrderTab>
+    {/* {
         salad.map(item=><FoodCard key={item._id} item={item}></FoodCard>)
-    }
+    } */}
     </div>
   </TabPanel>
   <TabPanel>
