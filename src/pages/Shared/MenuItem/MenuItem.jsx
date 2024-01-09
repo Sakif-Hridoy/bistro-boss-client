@@ -10,6 +10,8 @@ const MenuItem = ({item}) => {
                 <h3 className='uppercae'></h3>
                 <p>{recipe}</p>
             </div>
+            <button className='btn btn-outline'>Order Now</button>
+
         </div>
     );
 };
