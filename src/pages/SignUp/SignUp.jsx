@@ -11,7 +11,17 @@ const SignUp = props => {
         handleSubmit,
         formState: { errors },
       } = useForm()
-      const onSubmit = (data) => {console.log(data)}
+      const onSubmit = (data) => {
+        createUser(data.email,data.password)
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser)
+            if(loggedUser){
+                alert('User created Successfully')
+            }
+            
+        })
+        console.log(data)}
 
 
     // const handleSignUp = e =>{
@@ -53,7 +63,10 @@ const SignUp = props => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="password" name='password' {...register("password",{ required: true, maxLength: 20 })}  placeholder="password" className="input input-bordered" required />
+                <input type="password" name='password' {...register("password",{ required: true, maxLength: 20,
+                pattern:/(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z])/})}  placeholder="password" className="input input-bordered" required />
+                {errors.password?.type==='required' &&<span>Password must be 6 characters</span>}
+                {errors.password?.type==='pattern' && <span>password must be one lower case,one uppercase,one number and one special character</span>}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                 </label>
