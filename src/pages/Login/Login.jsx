@@ -2,14 +2,19 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
-import { Link, useRoutes } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useRoutes } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 
 const Login = props => {
 
-  const captchaRef = useRef(null);
+  // const captchaRef = useRef(null);
   const [disabled,setDisabled] = useState(true)
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/"
 
   const {signIn} = useContext(AuthContext)
 
@@ -41,6 +46,7 @@ const Login = props => {
                 `
               }
             });
+            navigate(from,{replace:true});
           }
         })
     }
