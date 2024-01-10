@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link, useRoutes } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 const Login = props => {
@@ -22,13 +23,32 @@ const Login = props => {
         .then(result=>{
           const user = result.user;
           console.log(user)
+          if(user){
+            Swal.fire({
+              title: "User Logged In Successfully",
+              showClass: {
+                popup: `
+                  animate__animated
+                  animate__fadeInUp
+                  animate__faster
+                `
+              },
+              hideClass: {
+                popup: `
+                  animate__animated
+                  animate__fadeOutDown
+                  animate__faster
+                `
+              }
+            });
+          }
         })
     }
 
 
     const handleValidateCaptcha = e=>{
       // e.preventDefault();
-      const user_captcha_value = captchaRef.current.value;
+      const user_captcha_value = e.target.value;
       // console.log(value)
       if(validateCaptcha(user_captcha_value)){
         setDisabled(false)
@@ -72,11 +92,11 @@ const Login = props => {
                 <LoadCanvasTemplate />
 
                 </label>
-                <input ref={captchaRef} type="text" name='captcha' placeholder="captcha" className="input input-bordered" required />
-                <button onClick={handleValidateCaptcha} className='btn btn-outline btn-xs'>Validate</button>
+                <input onBlur={handleValidateCaptcha}  type="text" name='captcha' placeholder="captcha" className="input input-bordered" required />
+                <input className='btn btn-outline btn-xs' value="Validate"/>
               </div>
               <div className="form-control mt-6">
-                <input disabled={disabled} className="btn btn-primary"  type="submit" value="Login" />
+                <button disabled={disabled} className="btn btn-primary"  type="submit" value="Login" >Login</button>
               </div>
             </form>
             <p><small>New Here?</small><Link to="/signUp">Create an account</Link></p>
