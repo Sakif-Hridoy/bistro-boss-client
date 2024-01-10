@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 
 
 const Login = props => {
+
+  const captchaRef = useRef(null);
+  const [disabled,setDisabled] = useState(true)
 
     const handleLogin = e =>{
         e.preventDefault();
@@ -11,6 +14,20 @@ const Login = props => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email,password)
+    }
+
+
+    const handleValidateCaptcha = e=>{
+      // e.preventDefault();
+      const user_captcha_value = captchaRef.current.value;
+      // console.log(value)
+      if(validateCaptcha(user_captcha_value)){
+        setDisabled(false)
+      }
+      else{
+        setDisabled(true)
+      }
+
     }
 
     useEffect(()=>{
@@ -46,11 +63,11 @@ const Login = props => {
                 <LoadCanvasTemplate />
 
                 </label>
-                <input type="text" name='captcha' placeholder="captcha" className="input input-bordered" required />
-                
+                <input ref={captchaRef} type="text" name='captcha' placeholder="captcha" className="input input-bordered" required />
+                <button onClick={handleValidateCaptcha} className='btn btn-outline btn-xs'>Validate</button>
               </div>
               <div className="form-control mt-6">
-                <input className="btn btn-primary"  type="submit" value="Login" />
+                <input disabled={disabled} className="btn btn-primary"  type="submit" value="Login" />
               </div>
             </form>
           </div>
