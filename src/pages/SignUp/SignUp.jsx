@@ -2,23 +2,30 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import { useForm } from 'react-hook-form';
 
 const SignUp = props => {
     const {createUser} = useContext(AuthContext)
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm()
+      const onSubmit = (data) => {console.log(data)}
 
 
-    const handleSignUp = e =>{
-        e.preventDefault();
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email,password)
-        createUser(email,password)
-        .then(result=>{
-          const user = result.user;
-          console.log(user)
-        })
-    }
+    // const handleSignUp = e =>{
+    //     e.preventDefault();
+    //     const form = e.target;
+    //     const email = form.email.value;
+    //     const password = form.password.value;
+    //     console.log(email,password)
+    //     createUser(email,password)
+    //     .then(result=>{
+    //       const user = result.user;
+    //       console.log(user)
+    //     })
+    // }
     
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -28,24 +35,25 @@ const SignUp = props => {
             <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
           </div>
           <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleSignUp} className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
-                <input type="text" name='name' placeholder="Your name" className="input input-bordered" required />
+                <input type="text" name='name' {...register("name",{ required: true })} placeholder="Your name" className="input input-bordered" />
+                {errors.name && <span>This field is required</span>}
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input type="email" name='email' placeholder="Your email" className="input input-bordered" required />
+                <input type="email" name='email' {...register("email")} placeholder="Your email" className="input input-bordered" required />
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="password" name='password' placeholder="password" className="input input-bordered" required />
+                <input type="password" name='password' {...register("password",{ required: true, maxLength: 20 })}  placeholder="password" className="input input-bordered" required />
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                 </label>
