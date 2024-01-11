@@ -1,10 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 import {FaShoppingCart} from 'react-icons/fa'
+import { axiosSecure } from '../../../hooks/useAxiosSecure';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+import useCart from '../../../hooks/useCart';
 
 const Navbar = props => {
+
+  // const [cartData,setCartData] = useState([]);
+  const [cart] = useCart()
+
+  // useEffect(()=>{
+  //   axiosSecure.get('/carts')
+  //   .then(res=>setCartData(res.data))
+  // },[])
 
   const {user,logOut} = useContext(AuthContext)
 
@@ -22,7 +37,7 @@ const Navbar = props => {
     <li>
       <Link to="/"><button className="btn">
  <FaShoppingCart></FaShoppingCart>
-  <div className="badge badge-secondary">+0</div>
+  <div className="badge badge-secondary">{cart.length}</div>
 </button></Link>
     </li>
     
