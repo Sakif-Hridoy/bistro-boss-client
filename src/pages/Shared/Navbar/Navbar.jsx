@@ -4,11 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 import {FaShoppingCart} from 'react-icons/fa'
 import { axiosSecure } from '../../../hooks/useAxiosSecure';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from '@tanstack/react-query'
+
 import useCart from '../../../hooks/useCart';
 
 const Navbar = props => {
@@ -35,7 +31,7 @@ const Navbar = props => {
     <li><NavLink to="/secret">Secret</NavLink></li>
     <li><NavLink to="/order/salad">Order Food</NavLink></li>
     <li>
-      <Link to="/"><button className="btn">
+      <Link to="/dashboard/cart"><button className="btn">
  <FaShoppingCart></FaShoppingCart>
   <div className="badge badge-secondary">{cart.length}</div>
 </button></Link>
