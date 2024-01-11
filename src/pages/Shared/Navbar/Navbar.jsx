@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
+import {FaShoppingCart} from 'react-icons/fa'
 
 const Navbar = props => {
 
@@ -17,7 +18,13 @@ const Navbar = props => {
     <li><NavLink to="/">Home</NavLink></li>
     <li><NavLink to="/menu">Our Menu</NavLink></li>
     <li><NavLink to="/secret">Secret</NavLink></li>
-    <li><NavLink to="/order">Order Food</NavLink></li>
+    <li><NavLink to="/order/salad">Order Food</NavLink></li>
+    <li>
+      <Link to="/"><button className="btn">
+ <FaShoppingCart></FaShoppingCart>
+  <div className="badge badge-secondary">+0</div>
+</button></Link>
+    </li>
     
     {
       user? <>
