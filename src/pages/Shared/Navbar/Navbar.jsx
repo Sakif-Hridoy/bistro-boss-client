@@ -37,12 +37,6 @@ const Navbar = props => {
 </button></Link>
     </li>
     
-    {
-      user? <>
-      <button onClick={handleLogOut} className='btn btn-ghost'>Log Out</button>
-      </> :<><li><NavLink to="/login">Login</NavLink></li></>
-    }
-    
     </>
 
     return (
@@ -65,7 +59,13 @@ const Navbar = props => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+  {
+      user? <>
+      <button className='btn btn-ghost'>{user.displayName}</button>
+      <img className='w-[50px]' src={user.photoURL} alt="" />
+      <button onClick={handleLogOut} className='btn btn-ghost'>Log Out</button>
+      </> :<><li><NavLink to="/login">Login</NavLink></li></>
+    }
   </div>
 </div>
         </div>

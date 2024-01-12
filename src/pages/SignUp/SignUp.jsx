@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const SignUp = props => {
-    const {createUser} = useContext(AuthContext)
+    const {createUser,updateUserProfile} = useContext(AuthContext)
+    const navigate = useNavigate()
     const {
         register,
+        reset,
         handleSubmit,
         formState: { errors },
       } = useForm()
@@ -16,6 +19,23 @@ const SignUp = props => {
         .then(result =>{
             const loggedUser = result.user;
             console.log(loggedUser)
+            updateUserProfile(data.name,data.photoURL)
+            .then(()=>{
+              console.log('user profile updated')
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              navigate('/')
+            })
+            .catch((error)=>{
+              console.log(error)
+            })
+            
             if(loggedUser){
                 alert('User created Successfully')
             }
@@ -52,6 +72,13 @@ const SignUp = props => {
                 </label>
                 <input type="text" name='name' {...register("name",{ required: true })} placeholder="Your name" className="input input-bordered" />
                 {errors.name && <span>This field is required</span>}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input type="text" {...register("photoURL",{ required: true })} placeholder="photo url" className="input input-bordered" />
+                {errors.photoURL && <span>This field is required</span>}
               </div>
               <div className="form-control">
                 <label className="label">
