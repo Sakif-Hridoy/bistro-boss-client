@@ -12,6 +12,9 @@ const DashBoard = props => {
                 <li><NavLink to="/dashboard/cart">My Cart</NavLink></li>
                 <li><NavLink to="/dashboard/review">Add a Review</NavLink></li>
                 <li><NavLink to="/dashboard/bookings">My Bookings</NavLink></li>
+                <div className='divider'></div>
+                <li><NavLink to="/">Home</NavLink></li>
+                <li><NavLink to="/menu">Menu</NavLink></li>
                 </ul>
             </div>
             <div className='flex-1'>
