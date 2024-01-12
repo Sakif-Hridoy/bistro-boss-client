@@ -4,6 +4,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link, useLocation, useNavigate, useRoutes } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 
 const Login = props => {
@@ -105,7 +106,9 @@ const Login = props => {
                 <button disabled={disabled} className="btn btn-primary"  type="submit" value="Login" >Login</button>
               </div>
             </form>
-            <p><small>New Here?</small><Link to="/signUp">Create an account</Link></p>
+            <p className='px-6'><small>New Here?</small><Link to="/signUp">Create an account</Link></p>
+            <SocialLogin className="justify-center w-full"></SocialLogin>
+
           </div>
         </div>
       </div>

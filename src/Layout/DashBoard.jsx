@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const DashBoard = props => {
+    const [cart] = useCart();
+
+    const isAdmin = true;
     return (
         <div className='flex'>
             <div className='w-64 min-h-screen bg-orange-400'>

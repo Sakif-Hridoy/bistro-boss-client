@@ -5,6 +5,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 const SignUp = props => {
   const axiosPublic = useAxiosPublic()
@@ -116,7 +117,8 @@ const SignUp = props => {
                 <input className="btn btn-primary"  type="submit" value="Sign Up" />
               </div>
             </form>
-            <p><small>Already Have Account?</small><Link to="/login">Login</Link></p>
+            <p className='px-6'><small>Already Have Account?</small><Link to="/login">Login</Link></p>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
