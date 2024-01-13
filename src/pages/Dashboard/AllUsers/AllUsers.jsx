@@ -7,14 +7,10 @@ import Swal from 'sweetalert2';
 
 const AllUsers = props => {
     const axiosSecure = useAxiosSecure();
-    const {refetch,data:users=[]} = useQuery({
+    const {data:users=[],refetch} = useQuery({
         queryKey:['users'],
         queryFn:async()=>{
-            const res = await axiosSecure.get('/users',{
-              headers:{
-                authorization:`Bearer ${localStorage.getItem('access-token')}`
-              }
-            });
+            const res = await axiosSecure.get('/users');
             console.log(res.data)
             return res.data
         }
@@ -86,7 +82,7 @@ const AllUsers = props => {
     <tbody>
       {/* row 1 */}
      {
-        users.map((user,index)=> <tr>
+        users.map((user,index)=> <tr key={user._id}>
             <th>{index+1}</th>
             <td>{user.name}</td>
             <td>{user.email}</td>
