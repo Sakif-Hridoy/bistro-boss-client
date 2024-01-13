@@ -7,16 +7,21 @@ import Swal from 'sweetalert2';
 
 const AllUsers = props => {
     const axiosSecure = useAxiosSecure();
-    const {data:users=[]} = useQuery({
+    const {refetch,data:users=[]} = useQuery({
         queryKey:['users'],
         queryFn:async()=>{
-            const res = await axiosSecure.get('/users');
+            const res = await axiosSecure.get('/users',{
+              headers:{
+                authorization:`Bearer ${localStorage.getItem('access-token')}`
+              }
+            });
             console.log(res.data)
             return res.data
         }
     })
 
     const handleDeleteUser = (id)=>{
+        console.log(id)
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -44,7 +49,20 @@ const AllUsers = props => {
     }
 
     const handleMakeAdmin = (user)=>{
-
+        axiosSecure.patch(`/users/admin/${user._id}`)
+        .then(res=>{
+            console.log(res.data)
+            if(res.data.modifiedCount >0){
+                refetch()
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${user.name} is an admin Now`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  }); 
+            }
+        })
     }
 
     return (
@@ -73,12 +91,14 @@ const AllUsers = props => {
             <td>{user.name}</td>
             <td>{user.email}</td>
             <td>
-            <button
-            onClick={handleMakeAdmin}
-                    className="btn btn-ghost btn-xs"
-                  >
-                    <FaUsers></FaUsers>
-                  </button>
+           {
+                user.role === 'admin' ? 'Admin' :  <button
+                onClick={()=>handleMakeAdmin(user)}
+                        className="btn btn-ghost btn-xs"
+                      >
+                        <FaUsers></FaUsers>
+                      </button>
+           }
             </td>
             <td>
             <button
