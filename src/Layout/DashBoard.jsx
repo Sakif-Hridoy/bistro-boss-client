@@ -16,7 +16,7 @@ const DashBoard = props => {
                     isAdmin ? <>
                     
                     <li><NavLink to="/dashboard/adminHome">Admin Home</NavLink></li>
-                <li><NavLink to="/dashboard/additems">Add Items</NavLink></li>
+                <li><NavLink to="/dashboard/addItems">Add Items</NavLink></li>
                 <li><NavLink to="/dashboard/manageItems">Manage Items</NavLink></li>
                 <li><NavLink to="/dashboard/manageBookings">Manage Bookings</NavLink></li>
                 <li><NavLink to="/dashboard/users">All Users</NavLink></li>
