@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { axiosSecure } from "../../../hooks/useAxiosSecure";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY; 
 console.log(image_hosting_key);
@@ -20,6 +21,19 @@ const AddItems = (props) => {
        }
     });
     console.log(res.data)
+
+    // if(res.data.success){
+    //       const menuItem = {
+    //         name:data.name,
+    //         category:data.category,
+    //         price:parseFloat(data.price),
+    //         recipe:data.recipe,
+    //         image:data.display_url
+    //       }
+
+    //       const menuRes = await axiosSecure.post('/menu',menuItem)
+    //       console.log('with image URL',menuRes)
+    // }
   };
   return (
     <div>
@@ -69,7 +83,7 @@ const AddItems = (props) => {
               </div>
               <input
                 type="number"
-                placeholder="Recipe Name"
+                placeholder="Price"
                 {...register("price",{required:true})}
                 className="input input-bordered w-full"
               />
