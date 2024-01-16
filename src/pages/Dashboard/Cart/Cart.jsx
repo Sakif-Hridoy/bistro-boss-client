@@ -41,7 +41,7 @@ const Cart = (props) => {
     <div>
       <div className="flex justify-evenly">
         <h2>Items :{cart.length}</h2>
-        <h2>Items :{totalPrice}</h2>
+        <h2>Total Price :{totalPrice}</h2>
        { cart.length ? <Link to="/dashboard/payment">
           
           <button className="btn btn-primary">Pay</button>
