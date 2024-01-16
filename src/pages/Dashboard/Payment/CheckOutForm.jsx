@@ -1,4 +1,4 @@
-import { CardElement, useElements } from '@stripe/react-stripe-js';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React from 'react';
 
 const CheckOutForm = () => {
@@ -12,6 +12,17 @@ const CheckOutForm = () => {
         const card = elements.getElement(CardElement)
         if(card === null){
             return
+        }
+
+        const {error,paymentMethod} = await stripe.createPaymentMethod({
+          type:'card',
+          card
+        })
+        if(error){
+          console.log('payment error',error)
+        }
+        else{
+          console.log('payment method',paymentMethod)
         }
     }
     return (
