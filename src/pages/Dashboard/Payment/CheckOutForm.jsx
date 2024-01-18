@@ -12,15 +12,17 @@ const CheckOutForm = () => {
     const elements = useElements()
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth()
-    const [cart] = useCart()
+    const [cart,refetch] = useCart()
     const totalPrice = cart.reduce((total,item)=>total + item.price,0)
 
     useEffect(()=>{
+     if(totalPrice >0){
       axiosSecure.post('/create-payment-intent',{price:totalPrice})
       .then(res=>{
         console.log(res.data.clientSecret)
         setClientSecret(res.data.clientSecret)
       })
+     }
     },[axiosSecure,totalPrice])
 
     const handleSubmit = async(event)=>{
@@ -79,8 +81,8 @@ const CheckOutForm = () => {
             }
 
             const res = await axiosSecure.post('/payments',payment);
-            console.log('payment saved',res)
-
+            console.log('payment saved',res.data)
+            refetch()
 
 
           }
